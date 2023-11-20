@@ -13,4 +13,13 @@ const createProduct = async (req: Request, res: Response): Promise<Response | vo
   }
 };
 
-export default { createProduct };
+const getAllProducts = async (req: Request, res: Response): Promise<Response | void> => {
+  try {
+    const allProducts = await productService.getAllProducts();
+    res.status(200).json(allProducts);
+  } catch (error) {
+    res.status(500).json({ msg: 'Internal error' });
+  }
+};
+
+export default { createProduct, getAllProducts };
