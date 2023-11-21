@@ -3,9 +3,7 @@ import ProductModel,
   from '../database/models/product.model';
 
 const validateProduct = ({ name, price, orderId }: ProductInputtableTypes): string | null => {
-  if (!name) return 'Name is required';
-  if (!price) return 'Price is required';
-  if (!orderId) return 'Order is required';
+  if (!name || !price || !orderId) return 'name, price or orderId is missing';
   return null;
 };
 

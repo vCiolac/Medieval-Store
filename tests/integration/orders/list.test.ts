@@ -11,7 +11,7 @@ describe('GET /orders', function () {
   beforeEach(function () { sinon.restore(); });
 
   it('Testando o retorno de todos os produtos', async function () {
-    const mock = ordersMock.getAllOrdersMock;
+    const mock = ordersMock.getOrdersMock;
     sinon.stub(ordersService, 'getAllOrders').resolves(mock);
 
     const response = await chai.request(app)
@@ -19,7 +19,7 @@ describe('GET /orders', function () {
       .send();
 
     expect(response.status).to.be.equals(200);
-    expect(response.body).to.be.deep.equals(ordersMock.getAllOrdersMock);
+    expect(response.body).to.be.deep.equals(ordersMock.getOrdersMock);
   });
 
 });

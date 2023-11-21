@@ -9,17 +9,13 @@ const createProduct = async (req: Request, res: Response): Promise<Response | vo
     const { id, name, price } = newProduct.dataValues;
     res.status(201).json({ id, name, price });
   } catch (error) {
-    res.status(500).json({ msg: 'Internal error' });
+    res.status(500).json({ message: 'Internal error' });
   }
 };
 
 const getAllProducts = async (req: Request, res: Response): Promise<Response | void> => {
-  try {
-    const allProducts = await productService.getAllProducts();
-    res.status(200).json(allProducts);
-  } catch (error) {
-    res.status(500).json({ msg: 'Internal error' });
-  }
+  const allProducts = await productService.getAllProducts();
+  res.status(200).json(allProducts);
 };
 
 export default { createProduct, getAllProducts };
