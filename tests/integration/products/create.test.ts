@@ -13,29 +13,27 @@ describe('POST /products', function () {
   afterEach(function () { sinon.restore(); });
 
   it('Testando o sucesso ao cadastrar produto', async function () {
-    const productRequest = productsMock.mockCreateProduct
+    const productRequest = productsMock.mockGetProducts
     const productBuild = productModel.build(productRequest);
 
     sinon.stub(productModel, 'create').resolves(productBuild);
 
     const response = await chai.request(app)
       .post('/products')
-      .send(productRequest);
+      .send(productsMock.mockCreateProduct);
 
     expect(response.status).to.be.equals(201);
     expect(response.body).to.be.deep.equals(productsMock.resultMockCreateProduct);
   });
 
   it('Testando o erro ao cadastrar produto', async function () {
-    const productRequest = productsMock.resultMockCreateProduct
-    const productBuild = productModel.build(productRequest);
-
-    sinon.stub(productModel, 'create').resolves(productBuild);
-
+    const productRequest = {
+      name: "Martelo de Thor",
+      price: 30,
+    };
     const response = await chai.request(app)
       .post('/products')
       .send(productRequest);
-
-    expect(response.status).to.be.equals(500);
+    expect(response.status).to.be.equals(422);
   });
 });

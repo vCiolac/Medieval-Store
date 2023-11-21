@@ -22,7 +22,7 @@ describe('GET /products', function () {
   });
 
   it('Testando o retorno de todos os produtos', async function () {
-    const mock = productsMock.mockGetProducts
+    const mock = productsMock.mockExcalibur
     const build = productModel.build(mock);
     sinon.stub(productsService, 'getAllProducts').resolves([build]);
 
